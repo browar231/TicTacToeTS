@@ -5,6 +5,8 @@ export class App {
     private player2 = new Player;
     private game = new Game(this.player1, this.player2);
     constructor(target: HTMLElement) {
+        while (!this.game.isGameWon()) {
 
+        }
     }
 }
