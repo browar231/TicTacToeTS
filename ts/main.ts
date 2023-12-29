@@ -1,6 +1,3 @@
-//elements
-const startButton = document.getElementById('start')!;
-//vars
-startButton.addEventListener('click', (e) => {
-    console.log('hello')
-})
+import { App } from './App.js'
+const gameCanvas = document.getElementById('game')!;
+new App(gameCanvas);
