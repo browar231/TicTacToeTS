@@ -5,6 +5,7 @@ export class Game {
     private board: Board = new Board;
     private currentPlayerIndex: number = 0;
     constructor(player1: Player, player2: Player) {
+        this.players = [player1, player2];
     returnCurrentPlayer(): Player {
         return this.players[this.currentPlayerIndex];
     }
