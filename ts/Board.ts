@@ -6,6 +6,9 @@ export class Board {
     private fields: (Player | null)[] = [null, null, null, null, null, null, null, null, null];
     private freeFieldsCount = 9;
     takeField(field: number, player: Player) {
+        if (!this.isInputValid(field)) {
+            return false;
+        }
         if (this.isBoardFull()) {
             return false;
         }
@@ -14,6 +17,15 @@ export class Board {
         }
         this.fields[field] = player;
         this.freeFieldsCount--;
+        return true;
+    }
+    isInputValid(field: number) {
+        if (field < 0) {
+            return false;
+        }
+        if (field > 8) {
+            return false;
+        }
         return true;
     }
     isFieldFree(field: number) {
