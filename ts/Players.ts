@@ -1,4 +1,5 @@
 import { Board } from './Board.js'
+type CPUStrategy = (board: Board, player: Player) => number;
 export abstract class Player {
     private name: string;
     constructor(name: string) {
@@ -18,12 +19,11 @@ export class PlayerCPU extends Player {
     provideField(board: Board): Promise<number> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(this.strategy(board));
+                resolve(this.strategy(board, this));
             }, 1000)
         });
     }
 }
-type CPUStrategy = (board: Board) => number;
 
 export const StrategyRandom: CPUStrategy = (board) => {
     const freeFields = board.returnFreeFields();
