@@ -4,7 +4,7 @@ export abstract class Player {
     constructor(name: string) {
         this.name = name;
     }
-    abstract provideField(board: Board): number;
+    abstract provideField(board: Board): Promise<number>;
     returnName() {
         return this.name;
     }
