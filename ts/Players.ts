@@ -30,3 +30,12 @@ export const StrategyRandom: CPUStrategy = (board) => {
     const randomField = Math.floor(Math.random() * freeFields.length);
     return freeFields[randomField];
 }
+export const StrategyDontMissWinningMove: CPUStrategy = (board, player) => {
+    const clonedBoard = board.clone();
+    const freeFields = clonedBoard.returnFreeFields();
+    const bestMove = freeFields.find((field) => {
+        clonedBoard.takeField(field, player);
+        return clonedBoard.isGameWon()
+    });
+    return bestMove || StrategyRandom(board, player);
+}
