@@ -8,6 +8,15 @@ export class Board {
     returnFields() {
         return this.fields;
     }
+    returnFreeFields() {
+        let freeFields: number[] = [];
+        this.fields.forEach((value, index) => {
+            if (value === null) {
+                freeFields.push(index);
+            }
+        })
+        return freeFields;
+    }
     takeField(field: number, player: Player) {
         if (!this.isInputValid(field)) {
             return false;

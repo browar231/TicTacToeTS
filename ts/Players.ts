@@ -12,15 +12,7 @@ export abstract class Player {
 export class PlayerCPU extends Player {
     constructor(name: string) {
         super(name);
-    }
-    private returnFreeFields(board: Board) {
-        let freeFields: number[] = [];
-        board.returnFields().forEach((value, index) => {
-            if (value === null) {
-                freeFields.push(index);
-            }
-        })
-        return freeFields;
+        this.strategy = strategy;
     }
     provideField(board: Board): Promise<number> {
         return new Promise((resolve, reject) => {
