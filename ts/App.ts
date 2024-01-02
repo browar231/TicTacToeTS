@@ -1,8 +1,8 @@
 import { Game } from './Game.js'
-import { Player, PlayerCPU } from './Players.js';
+import { Player, PlayerCPU, StrategyRandom } from './Players.js';
 export class App {
-    private player1 = new PlayerCPU('cpu #1');
-    private player2 = new PlayerCPU('cpu #2');
+    private player1 = new PlayerCPU('cpu #1', StrategyRandom);
+    private player2 = new PlayerCPU('cpu #2', StrategyRandom);
     private game = new Game(this.player1, this.player2);
     private fields: HTMLElement[] = [];
     private target: HTMLElement;

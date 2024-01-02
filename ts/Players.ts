@@ -10,17 +10,27 @@ export abstract class Player {
     }
 }
 export class PlayerCPU extends Player {
-    constructor(name: string) {
+    private strategy: CPUStrategy;
+    constructor(name: string, strategy: CPUStrategy) {
         super(name);
         this.strategy = strategy;
     }
     provideField(board: Board): Promise<number> {
         return new Promise((resolve, reject) => {
-            const freeFields = this.returnFreeFields(board);
-            const randomField = Math.floor(Math.random() * freeFields.length);
+            this.strategy.provideField(board)
             setTimeout(() => {
-                resolve(freeFields[randomField])
-            }, 1000);
+                resolve(this.strategy.provideField(board));
+            }, 1000)
         });
+    }
+}
+export interface CPUStrategy {
+    provideField(board: Board): number;
+}
+export const StrategyRandom: CPUStrategy = {
+    provideField: (board: Board): number => {
+        const freeFields = board.returnFreeFields();
+        const randomField = Math.floor(Math.random() * freeFields.length);
+        return freeFields[randomField];
     }
 }
