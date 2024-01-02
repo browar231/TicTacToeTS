@@ -17,6 +17,12 @@ export class Board {
         })
         return freeFields;
     }
+    clone() {
+        const clone = new Board;
+        clone.fields = this.fields;
+        clone.freeFieldsCount = this.freeFieldsCount;
+        return clone;
+    }
     takeField(field: number, player: Player) {
         if (!this.isInputValid(field)) {
             return false;
