@@ -19,18 +19,15 @@ export class PlayerCPU extends Player {
         return new Promise((resolve, reject) => {
             this.strategy.provideField(board)
             setTimeout(() => {
-                resolve(this.strategy.provideField(board));
+                resolve(this.strategy(board));
             }, 1000)
         });
     }
 }
-export interface CPUStrategy {
-    provideField(board: Board): number;
-}
-export const StrategyRandom: CPUStrategy = {
-    provideField: (board: Board): number => {
-        const freeFields = board.returnFreeFields();
-        const randomField = Math.floor(Math.random() * freeFields.length);
-        return freeFields[randomField];
-    }
+type CPUStrategy = (board: Board) => number;
+
+export const StrategyRandom: CPUStrategy = (board) => {
+    const freeFields = board.returnFreeFields();
+    const randomField = Math.floor(Math.random() * freeFields.length);
+    return freeFields[randomField];
 }
