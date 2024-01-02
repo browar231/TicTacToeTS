@@ -24,7 +24,7 @@ export class Game {
     returnCurrentPlayer(): Player {
         return this.players[this.currentPlayerIndex];
     }
-    switchToNextPlayer() {
+    private switchToNextPlayer() {
         this.currentPlayerIndex += 1;
         this.currentPlayerIndex %= 2;
     }
