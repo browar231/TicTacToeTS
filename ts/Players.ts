@@ -13,7 +13,22 @@ export class PlayerCPU extends Player {
     constructor(name: string) {
         super(name);
     }
-    provideField(board: Board): number {
-        return Math.floor(Math.random() * 9);
-}
+    private returnFreeFields(board: Board) {
+        let freeFields: number[] = [];
+        board.returnFields().forEach((value, index) => {
+            if (value === null) {
+                freeFields.push(index);
+            }
+        })
+        return freeFields;
+    }
+    provideField(board: Board): Promise<number> {
+        return new Promise((resolve, reject) => {
+            const freeFields = this.returnFreeFields(board);
+            const randomField = Math.floor(Math.random() * freeFields.length);
+            setTimeout(() => {
+                resolve(freeFields[randomField])
+            }, 1000);
+        });
+    }
 }
