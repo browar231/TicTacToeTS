@@ -1,4 +1,4 @@
-import { Player } from "./Players"
+import { Player } from "./Players.js"
 /**
  * Class for managing board, allows for taking place on it, and checking if move is available
  */
