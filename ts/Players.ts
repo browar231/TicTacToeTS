@@ -17,7 +17,6 @@ export class PlayerCPU extends Player {
     }
     provideField(board: Board): Promise<number> {
         return new Promise((resolve, reject) => {
-            this.strategy.provideField(board)
             setTimeout(() => {
                 resolve(this.strategy(board));
             }, 1000)
