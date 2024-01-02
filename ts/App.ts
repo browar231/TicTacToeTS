@@ -21,6 +21,14 @@ export class App {
         const board = this.game.returnBoard();
         currentPlayer.provideField(board).then(field => {
             this.game.move(currentPlayer, field);
+            board.returnFields().forEach((field, index) => {
+                if (field === this.player1) {
+                    this.fields[index].style.backgroundColor = '#f00';
+                }
+                if (field === this.player2) {
+                    this.fields[index].style.backgroundColor = '#00f';
+                }
+            });
             if (this.game.isGameWon()) {
                 alert(`${this.game.returnCurrentPlayer().returnName()} won!`)
             }
