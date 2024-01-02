@@ -8,17 +8,14 @@ export class Game {
         this.players = [player1, player2];
 
     }
-    async play() {
-        while (true) {
-            const fieldInput = await this.returnCurrentPlayer().provideField(this.board);
-            if (!this.board.takeField(fieldInput, this.returnCurrentPlayer())) {
-                continue;
-            }
-            if (this.isGameWon()) {
-                break;
-            }
-            this.switchToNextPlayer();
+    async move(player: Player, field: number) {
+        if (!this.board.takeField(field, player)) {
+            return;
         }
+        if (this.isGameWon()) {
+            return;
+        }
+        this.switchToNextPlayer();
         return this.returnCurrentPlayer();
     }
     returnCurrentPlayer(): Player {
