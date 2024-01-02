@@ -5,6 +5,9 @@ import { Player } from "./Players"
 export class Board {
     private fields: (Player | null)[] = [null, null, null, null, null, null, null, null, null];
     private freeFieldsCount = 9;
+    returnFields() {
+        return this.fields;
+    }
     takeField(field: number, player: Player) {
         if (!this.isInputValid(field)) {
             return false;
