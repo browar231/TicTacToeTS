@@ -31,7 +31,7 @@ export const StrategyRandom: CPUStrategy = (board) => {
     return freeFields[randomField];
 }
 export const StrategyDontMissWinningMove: CPUStrategy = (board, player) => {
-    const clonedBoard = board.clone();
+    const clonedBoard: Board = Object.assign(Object.create(Object.getPrototypeOf(board)), board)
     const freeFields = clonedBoard.returnFreeFields();
     const bestMove = freeFields.find((field) => {
         clonedBoard.takeField(field, player);
