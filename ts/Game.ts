@@ -6,7 +6,6 @@ export class Game {
     private currentPlayerIndex: number = 0;
     constructor(player1: Player, player2: Player) {
         this.players = [player1, player2];
-
     }
     async move(player: Player, field: number) {
         if (!this.board.takeField(field, player)) {

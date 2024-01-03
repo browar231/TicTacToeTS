@@ -5,6 +5,14 @@ import { Player } from "./Players.js"
 export class Board {
     private fields: (Player | null)[] = [null, null, null, null, null, null, null, null, null];
     private freeFieldsCount = 9;
+    constructor(fields?: (Player | null)[], freeFieldsCount?: number) {
+        if (fields) {
+            this.fields = fields;
+        }
+        if (freeFieldsCount) {
+            this.freeFieldsCount = freeFieldsCount;
+        }
+    }
     returnFields() {
         return this.fields;
     }
@@ -18,9 +26,7 @@ export class Board {
         return freeFields;
     }
     clone() {
-        const clone = new Board;
-        clone.fields = this.fields;
-        clone.freeFieldsCount = this.freeFieldsCount;
+        const clone = new Board(this.fields, this.freeFieldsCount);
         return clone;
     }
     takeField(field: number, player: Player) {
