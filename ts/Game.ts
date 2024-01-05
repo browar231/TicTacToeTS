@@ -1,31 +1,27 @@
 import { Player } from './Players.js'
 import { Board } from './Board.js'
+import { TurnManager } from './TurnManager.js';
 export class Game {
-    private players: Player[];
     private board: Board = new Board;
-    private currentPlayerIndex: number = 0;
+    private turns: TurnManager;
     constructor(player1: Player, player2: Player) {
-        this.players = [player1, player2];
+        this.turns = new TurnManager([player1, player2]);
     }
-    async move(player: Player, field: number) {
+    move(player: Player, field: number) {
         if (!this.board.takeField(field, player)) {
             return;
         }
         if (this.isGameWon()) {
             return;
         }
-        this.switchToNextPlayer();
+        this.turns.switchToNextPlayer();
         return this.returnCurrentPlayer();
     }
     returnCurrentPlayer(): Player {
-        return this.players[this.currentPlayerIndex];
+        return this.turns.returnCurrentPlayer();
     }
     returnBoard() {
         return this.board;
-    }
-    private switchToNextPlayer() {
-        this.currentPlayerIndex += 1;
-        this.currentPlayerIndex %= 2;
     }
     isGameWon() {
         return this.board.isGameWon();
