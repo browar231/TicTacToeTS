@@ -26,7 +26,7 @@ export class Board {
         return freeFields;
     }
     clone() {
-        const clone = new Board(this.fields, this.freeFieldsCount);
+        let clone = new Board(Array.from(this.fields), this.freeFieldsCount);
         return clone;
     }
     takeField(field: number, player: Player) {
