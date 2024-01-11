@@ -11,6 +11,7 @@ export class App {
         for (let i = 0; i < 9; i++) {
             const field = document.createElement('div');
             field.classList.add('field');
+            field.dataset.fieldId = `${i}`;
             this.target.appendChild(field);
             this.fields.push(field);
         }
