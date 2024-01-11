@@ -41,6 +41,7 @@ export class App {
     turn() {
         const currentPlayer = this.game.returnCurrentPlayer();
         const board = this.game.returnBoard();
+        this.textElement.innerText = currentPlayer.returnName();
         currentPlayer.provideField(board).then(field => {
             this.game.move(currentPlayer, field);
             board.returnFields().forEach((field, index) => {
@@ -51,11 +52,15 @@ export class App {
                     this.fields[index].style.backgroundColor = '#00f';
                 }
             });
+            if (this.game.isGameWon()) {
+                this.textElement.innerText = `${this.game.returnCurrentPlayer().returnName()} won!`;
+                return true;
+            }
             if (this.game.isGameInProgress()) {
                 this.turn();
-            }
-            else {
-                alert(`${this.game.returnCurrentPlayer().returnName()} won!`)
+            } else {
+                this.textElement.innerText = 'draw';
+
             }
         });
     }
