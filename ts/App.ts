@@ -1,9 +1,9 @@
 import { Game } from './Game.js'
-import { Player, PlayerCPU, StrategyRandom, StrategyDontMissWinningMove } from './Players.js';
+import { Player, PlayerCPU, PlayerHuman, StrategyRandom, StrategyDontMissWinningMove } from './Players.js';
 export class App {
-    private player1 = new PlayerCPU('cpu #1', StrategyDontMissWinningMove);
-    private player2 = new PlayerCPU('cpu #2', StrategyDontMissWinningMove);
-    private game = new Game(this.player1, this.player2);
+    private player1;
+    private player2;
+    private game;
     private fields: HTMLElement[] = [];
     private target: HTMLElement;
     constructor(target: HTMLElement) {
@@ -15,7 +15,24 @@ export class App {
             this.target.appendChild(field);
             this.fields.push(field);
         }
+        this.player1 = new PlayerCPU('cpu #1', StrategyDontMissWinningMove);
+        this.player2 = new PlayerHuman('cpu #2', this.returnPromiseResolvableOnUserClick.bind(this));
+        this.game = new Game(this.player1, this.player2);
         this.turn();
+    }
+    returnPromiseResolvableOnUserClick(): Promise<number> {
+        return new Promise((resolve) => {
+            this.target.addEventListener('click', (event) => {
+                const target = event.target as HTMLElement;
+                if (!target.classList.contains('field')) {
+                    return false;
+                }
+                if (target.dataset.fieldId === undefined) {
+                    return false;
+                }
+                resolve(~~target.dataset.fieldId!);
+            })
+        })
     }
     turn() {
         const currentPlayer = this.game.returnCurrentPlayer();
