@@ -6,6 +6,7 @@ export class App {
     private game;
     private fields: HTMLElement[] = [];
     private target: HTMLElement;
+    private textElement: HTMLElement;
     constructor(target: HTMLElement) {
         this.target = target;
         for (let i = 0; i < 9; i++) {
@@ -15,6 +16,9 @@ export class App {
             this.target.appendChild(field);
             this.fields.push(field);
         }
+        this.textElement = document.createElement('div');
+        this.textElement.id = "text";
+        this.target.appendChild(this.textElement);
         this.player1 = new PlayerCPU('cpu #1', StrategyDontMissWinningMove);
         this.player2 = new PlayerHuman('cpu #2', this.returnPromiseResolvableOnUserClick.bind(this));
         this.game = new Game(this.player1, this.player2);
