@@ -26,4 +26,13 @@ export class Game {
     isGameWon() {
         return this.board.isGameWon();
     }
+    isGameInProgress() {
+        if (this.isGameWon()) {
+            return false;
+        }
+        if (this.board.isBoardFull()) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -47,10 +47,12 @@ export class App {
                     this.fields[index].style.backgroundColor = '#00f';
                 }
             });
-            if (this.game.isGameWon()) {
+            if (this.game.isGameInProgress()) {
+                this.turn();
+            }
+            else {
                 alert(`${this.game.returnCurrentPlayer().returnName()} won!`)
             }
-            else { this.turn(); }
         });
     }
 }
