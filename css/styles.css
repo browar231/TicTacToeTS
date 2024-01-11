@@ -32,6 +32,6 @@ body {
     padding: 1.5em;
 }
 
-#start {
+#game>#text {
     grid-column: 1/4;
 }
