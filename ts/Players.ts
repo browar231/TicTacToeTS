@@ -24,6 +24,16 @@ export class PlayerCPU extends Player {
         });
     }
 }
+export class PlayerHuman extends Player {
+    private externalInputProvider;
+    constructor(name: string, externalInputProvider: () => Promise<number>) {
+        super(name);
+        this.externalInputProvider = externalInputProvider;
+    }
+    async provideField(board: Board): Promise<number> {
+        return await this.externalInputProvider();
+    }
+}
 
 export const StrategyRandom: CPUStrategy = (board) => {
     const freeFields = board.returnFreeFields();
