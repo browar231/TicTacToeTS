@@ -21,7 +21,7 @@ export class Game {
         if (!this.board.takeField(field, player)) {
             return;
         }
-        if (this.isGameWon()) {
+        if (this.isWon()) {
             return;
         }
         this.turns.switchToNextPlayer();
@@ -33,8 +33,8 @@ export class Game {
     returnBoard() {
         return this.board;
     }
-    isGameInProgress() {
-        if (this.isGameWon()) {
+    isInProgress() {
+        if (this.isWon()) {
             return false;
         }
         if (this.board.isBoardFull()) {
@@ -42,7 +42,7 @@ export class Game {
         }
         return true;
     }
-    isGameWon() {
+    isWon() {
         return this.checkCols() || this.checkRows() || this.checkDiags();
     }
     private checkCols() {

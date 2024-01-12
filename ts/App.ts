@@ -51,7 +51,7 @@ export class App {
                     this.fields[index].style.backgroundColor = '#00f';
                 }
             });
-            if (this.game.isGameWon()) {
+            if (this.game.isWon()) {
                 this.textElement.innerText = `${this.game.returnCurrentPlayer().returnName()} won!`;
                 return true;
             }
