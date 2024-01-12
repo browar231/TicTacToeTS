@@ -4,8 +4,18 @@ import { TurnManager } from './TurnManager.js';
 export class Game {
     private board: Board = new Board;
     private turns: TurnManager;
+    private player1;
+    private player2;
     constructor(player1: Player, player2: Player) {
-        this.turns = new TurnManager([player1, player2]);
+        this.player1 = player1;
+        this.player2 = player2;
+        this.turns = new TurnManager([this.player1, this.player2]);
+    }
+    clone() {
+        const clonedGame = new Game(this.player1, this.player2);
+        clonedGame.board = this.board.clone();
+        clonedGame.turns = this.turns.clone();
+        return clonedGame;
     }
     move(player: Player, field: number) {
         if (!this.board.takeField(field, player)) {
