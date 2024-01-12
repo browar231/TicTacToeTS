@@ -55,7 +55,7 @@ export class App {
                 this.textElement.innerText = `${this.game.returnCurrentPlayer().returnName()} won!`;
                 return true;
             }
-            if (this.game.isGameInProgress()) {
+            if (this.game.isInProgress()) {
                 this.turn();
             } else {
                 this.textElement.innerText = 'draw';
