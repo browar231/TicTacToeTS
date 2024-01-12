@@ -46,7 +46,7 @@ export class App {
                     this.fields[index].style.backgroundColor = '#00f';
                 }
             });
-            if (this.game.isGameInProgress()) {
+            if (this.game.isInProgress()) {
                 this.turn();
             }
             else {

@@ -46,7 +46,7 @@ export const StrategyDontMissWinningMove: CPUStrategy = (game, player) => {
     const bestMove = freeFields.find((field) => {
         const clonedGame: Game = game.clone();
         clonedGame.move(player, field);
-        return clonedGame.isGameWon()
+        return clonedGame.isWon()
     });
     return bestMove || StrategyRandom(game, player);
 }
