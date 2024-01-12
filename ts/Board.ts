@@ -58,40 +58,4 @@ export class Board {
     isBoardFull() {
         return this.freeFieldsCount === 0;
     }
-    isGameWon() {
-        return this.checkCols() || this.checkRows() || this.checkDiags();
-    }
-    private checkCols() {
-        if (this.fields[0] !== null && this.fields[0] === this.fields[3] && this.fields[3] === this.fields[6]) {
-            return true;
-        }
-        if (this.fields[1] !== null && this.fields[1] === this.fields[4] && this.fields[4] === this.fields[7]) {
-            return true;
-        }
-        if (this.fields[2] !== null && this.fields[2] === this.fields[5] && this.fields[5] === this.fields[8]) {
-            return true;
-        }
-        return false;
-    }
-    private checkRows() {
-        if (this.fields[0] !== null && this.fields[0] === this.fields[1] && this.fields[1] === this.fields[2]) {
-            return true;
-        }
-        if (this.fields[3] !== null && this.fields[3] === this.fields[4] && this.fields[4] === this.fields[5]) {
-            return true;
-        }
-        if (this.fields[6] !== null && this.fields[6] === this.fields[7] && this.fields[7] === this.fields[8]) {
-            return true;
-        }
-        return false;
-    }
-    private checkDiags() {
-        if (this.fields[0] !== null && this.fields[0] === this.fields[4] && this.fields[4] === this.fields[8]) {
-            return true;
-        }
-        if (this.fields[2] !== null && this.fields[2] === this.fields[4] && this.fields[4] === this.fields[6]) {
-            return true;
-        }
-        return false;
-    }
 }
