@@ -36,10 +36,9 @@ export class App {
     }
     turn() {
         const currentPlayer = this.game.returnCurrentPlayer();
-        const board = this.game.returnBoard();
-        currentPlayer.provideField(board).then(field => {
+        currentPlayer.provideField(this.game).then(field => {
             this.game.move(currentPlayer, field);
-            board.returnFields().forEach((field, index) => {
+            this.game.returnBoard().returnFields().forEach((field, index) => {
                 if (field === this.player1) {
                     this.fields[index].style.backgroundColor = '#f00';
                 }
