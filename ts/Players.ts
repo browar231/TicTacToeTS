@@ -1,11 +1,12 @@
 import { Board } from './Board.js'
-type CPUStrategy = (board: Board, player: Player) => number;
+import { Game } from './Game.js';
+type CPUStrategy = (game: Game, player: Player) => number;
 export abstract class Player {
     private name: string;
     constructor(name: string) {
         this.name = name;
     }
-    abstract provideField(board: Board): Promise<number>;
+    abstract provideField(game: Game): Promise<number>;
     returnName() {
         return this.name;
     }
@@ -16,10 +17,10 @@ export class PlayerCPU extends Player {
         super(name);
         this.strategy = strategy;
     }
-    provideField(board: Board): Promise<number> {
+    provideField(game: Game): Promise<number> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(this.strategy(board, this));
+                resolve(this.strategy(game, this));
             }, 1000)
         });
     }
@@ -30,22 +31,22 @@ export class PlayerHuman extends Player {
         super(name);
         this.externalInputProvider = externalInputProvider;
     }
-    async provideField(board: Board): Promise<number> {
+    async provideField(game: Game): Promise<number> {
         return await this.externalInputProvider();
     }
 }
 
-export const StrategyRandom: CPUStrategy = (board) => {
-    const freeFields = board.returnFreeFields();
+export const StrategyRandom: CPUStrategy = (game) => {
+    const freeFields = game.returnBoard().returnFreeFields();
     const randomField = Math.floor(Math.random() * freeFields.length);
     return freeFields[randomField];
 }
-export const StrategyDontMissWinningMove: CPUStrategy = (board, player) => {
-    const freeFields = board.returnFreeFields();
+export const StrategyDontMissWinningMove: CPUStrategy = (game, player) => {
+    const freeFields = game.returnBoard().returnFreeFields();
     const bestMove = freeFields.find((field) => {
-        const clonedBoard: Board = board.clone();
-        clonedBoard.takeField(field, player);
-        return clonedBoard.isGameWon()
+        const clonedGame: Game = game.clone();
+        clonedGame.move(player, field);
+        return clonedGame.isGameWon()
     });
-    return bestMove || StrategyRandom(board, player);
+    return bestMove || StrategyRandom(game, player);
 }
