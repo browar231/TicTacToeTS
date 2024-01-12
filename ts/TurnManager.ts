@@ -7,6 +7,11 @@ export class TurnManager {
         this.players = players;
         this.playersCount = players.length;
     }
+    clone() {
+        const clonedManager = new TurnManager(Array.from(this.players));
+        clonedManager.currentPlayerIndex = this.currentPlayerIndex;
+        return clonedManager;
+    }
     switchToNextPlayer() {
         this.currentPlayerIndex = this.returnNextPlayerIndex();
     }
